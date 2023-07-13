@@ -1,0 +1,3 @@
+## cheatsheet @quick @reference
+Open Cheatsheet | <leader>hc
+Edit Cheatsheet | <leader>he

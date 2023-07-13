@@ -1,4 +1,9 @@
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fa', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
+local wk = require('which-key')
+
+wk.register({
+    ["<leader>f"] = { name = "Telescope" },
+    ["<leader>ff"] = { builtin.find_files, "Find Files" },
+    ["<leader>fa"] = { builtin.live_grep, "Find Everywhere | Live Grep" },
+    ["<leader>fg"] = { builtin.git_files, "Find in Git repo" },
+})

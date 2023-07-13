@@ -46,23 +46,51 @@ return require('packer').startup(function(use)
   
   -- LSP Zero (Language Service Provider Manager)
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
-		  {                                      -- Optional
-		  'williamboman/mason.nvim',
-		  run = function()
-			  pcall(vim.cmd, 'MasonUpdate')
-		  end,
-	  },
-	  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v2.x',
+      requires = {
+          -- LSP Support
+          {'neovim/nvim-lspconfig'},             -- Required
+          {                                      -- Optional
+          'williamboman/mason.nvim',
+          run = function()
+              pcall(vim.cmd, 'MasonUpdate')
+          end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-	  -- Autocompletion
-	  {'hrsh7th/nvim-cmp'},     -- Required
-	  {'hrsh7th/cmp-nvim-lsp'}, -- Required
-	  {'L3MON4D3/LuaSnip'},     -- Required
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
   }
-}
+  }
+
+  -- Which Key (docs for remaps)
+  use {
+      "folke/which-key.nvim",
+      config = function()
+          vim.o.timeout = true
+          vim.o.timeoutlen = 500
+          require("which-key").setup {
+              -- your configuration comes here
+              -- or leave it empty to use the default settings
+              -- refer to the configuration section below
+          }
+      end
+  }
+  
+  -- Cheatsheet (Search for keymaps)
+  use {
+      'sudormrfbin/cheatsheet.nvim',
+
+      requires = {
+          {'nvim-telescope/telescope.nvim'},
+          {'nvim-lua/popup.nvim'},
+          {'nvim-lua/plenary.nvim'},
+      }
+  }
+
+  -- Toggleterm (Terminal)
+  use "akinsho/toggleterm.nvim"
 end)
