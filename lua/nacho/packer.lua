@@ -1,4 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
@@ -93,4 +93,17 @@ return require('packer').startup(function(use)
 
   -- Toggleterm (Terminal)
   use "akinsho/toggleterm.nvim"
+
+  -- Dap and Dap-ui (Debugger)
+  use {
+      "rcarriga/nvim-dap-ui",
+      requires = {"mfussenegger/nvim-dap"}
+  }
+  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+  use {
+      "microsoft/vscode-js-debug",
+      opt = true,
+      run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+  }
+
 end)

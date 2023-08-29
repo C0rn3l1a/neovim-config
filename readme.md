@@ -1,3 +1,7 @@
+## Nacho's Neovim config
+This is my personal neovim config that I use everyday. The purpose of this repo is for me to share my preferred neovim
+config between multiple machines and for any interested person to fork it and use it if they wish to do so.
+
 ## Workflow
 When installing a new plugin make sure to follow these instructions:
 - Import in `packer.lua`
