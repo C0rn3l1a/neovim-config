@@ -1,6 +1,6 @@
 function applyColors()
 	-- use Abstract colorscheme as default
-	color = color or "abscs"
+	color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 
 	-- use transparent background
