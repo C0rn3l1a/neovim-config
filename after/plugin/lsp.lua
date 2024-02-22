@@ -49,7 +49,7 @@ lsp.on_attach(function(client, bufnr)
         ["<leader>vh"] = { function() vim.lsp.buf.signature_help() end, "Signature Help" },
         ["<leader>vws"] = { function() vim.lsp.buf.workspace_symbol() end, "View Workspace Symbol" },
         ["<leader>vf"] = { function() vim.lsp.buf.format() end, "Format" },
-        ["<leader>vd"] = { function() vim.diagnostic.open_float() end, "Open Float" },
+        ["<leader>vd"] = { function() vim.diagnostic.open_float() end, "View Diagnostic" },
     }, opts)
 end)
 

@@ -9,6 +9,10 @@ wk.register({
     ["<leader>y"] = { "\"+y", "Shared Copy" },
     ["<leader>y"] = { "\"+y", "Shared Copy", mode = "v" },
     ["<leader>Y"] = { "\"+Y", "Shared Copy Line" },
+    -- paste helpers
+    ["<leader>pp"] = { "\"+p", "Shared Paste" },
+    ["<leader>pp"] = { "\"+p", "Shared Paste", mode = "v" },
+    ["<leader>P"] = { "\"+P", "Shared Paste Line" },
     -- move between splits
 })
 

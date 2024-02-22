@@ -17,8 +17,13 @@ return require('packer').startup(function(use)
     -- Telescope (Fuzzy Finder)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        -- or                            , branch = '0.1.x',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { "nvim-telescope/telescope-live-grep-args.nvim" },
+        },
+        config = function()
+            require("telescope").load_extension("live_grep_args")
+        end
     }
 
     -- Abstract-IDE (Theme)
@@ -102,6 +107,16 @@ return require('packer').startup(function(use)
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
+        end
+    }
+
+    -- Jest runner
+    use {
+        'mattkubej/jest.nvim',
+        config = function()
+            require('nvim-jest').setup({
+                jest_cmd = 'yarn jest',
+            })
         end
     }
 end)
