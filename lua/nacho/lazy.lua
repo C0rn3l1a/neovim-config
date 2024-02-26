@@ -122,6 +122,14 @@ local plugins = {
 	},
     -- similar to gitlens
     "lewis6991/gitsigns.nvim",
+    -- Lazygit
+    {
+        "kdheepak/lazygit.nvim",
+        -- optional for floating window border decoration
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
     ----- /GIT -----
     -- tmux support
     "nathom/tmux.nvim",
@@ -256,6 +264,44 @@ local plugins = {
             end
 
             return opts
+        end,
+    },
+    -- Tests
+    {
+        "nvim-neotest/neotest",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "antoinemadec/FixCursorHold.nvim",
+            "olimorris/neotest-rspec",
+            "haydenmeade/neotest-jest",
+            "zidhuss/neotest-minitest",
+            "mfussenegger/nvim-dap",
+            "jfpedroza/neotest-elixir",
+        },
+        opts = {},
+        config = function()
+            local neotest = require("neotest")
+
+            local neotest_jest = require("neotest-jest")({
+                jestCommand = "yarn jest --",
+            })
+            neotest_jest.filter_dir = function(name)
+                return name ~= "node_modules" and name ~= "__snapshots__"
+            end
+
+            neotest.setup({
+                adapters = {
+                    neotest_jest,
+                },
+                output_panel = {
+                    enabled = true,
+                    open = "botright split | resize 15",
+                },
+                quickfix = {
+                    open = false,
+                },
+            })
         end,
     },
 }
