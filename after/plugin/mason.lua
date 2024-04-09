@@ -22,7 +22,6 @@ mason_tool_installer.setup({
         "htmlbeautifier",
         "beautysh",
         "rustfmt",
-        "yamlfix",
         "angular-language-server",
     },
 })

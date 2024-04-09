@@ -22,17 +22,6 @@ local plugins = {
     },
 	-- keymap helper
 	{ "folke/which-key.nvim", lazy = true },
-	-- pretty textboxes
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
-	-- pretty messages
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		}
-	},
     ----- Code Features -----
 	-- code highlight
 	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
@@ -160,15 +149,6 @@ local plugins = {
             })
         end,
     },
-    -- Sorround text with brackets, tags and stuff
-    {
-        "kylechui/nvim-surround",
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
-    },
     -- Clipboard manager
     {
         "AckslD/nvim-neoclip.lua",
@@ -193,79 +173,6 @@ local plugins = {
             require("unimpaired").setup()
         end,
     },
-    -- multi cursor support (Ctrl-N)
-    "mg979/vim-visual-multi",
-    -- Dashboard
-    {
-        "nvimdev/dashboard-nvim",
-        event = "VimEnter",
-        opts = function()
-            local logo = [[
-                                   
-            ████ ██████           █████      ██                     
-            ███████████             █████                             
-            █████████ ███████████████████ ███   ███████████   
-            █████████  ███    █████████████ █████ ██████████████   
-            █████████ ██████████ █████████ █████ █████ ████ █████   
-            ███████████ ███    ███ █████████ █████ █████ ████ █████  
-            ██████  █████████████████████ ████ █████ █████ ████ ██████ 
-            ]]
-
-            logo = string.rep("\n", 8) .. logo .. "\n\n"
-
-            local opts = {
-                theme = "doom",
-                hide = {
-                    -- this is taken care of by lualine
-                    -- enabling this messes up the actual laststatus setting after loading a file
-                    statusline = false,
-                },
-                config = {
-                    header = vim.split(logo, "\n"),
-                    -- stylua: ignore
-                    center = {
-                        { action = "Telescope find_files", desc = " Find file", icon = " ", key = "f" },
-                        { action = "ene | startinsert", desc = " New file", icon = " ", key = "n" },
-                        { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r" },
-                        { action = "Telescope live_grep", desc = " Find text", icon = " ", key = "g" },
-                        {
-                            action = [[lua require("lazyvim.util").telescope.config_files()()]],
-                            desc = " Config",
-                            icon = " ",
-                            key = "c"
-                        },
-                        { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
-                        { action = "LazyExtras", desc = " Lazy Extras", icon = " ", key = "x" },
-                        { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
-                        { action = "qa", desc = " Quit", icon = " ", key = "q" },
-                    },
-                    footer = function()
-                        local stats = require("lazy").stats()
-                        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                        return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
-                    end,
-                },
-            }
-
-            for _, button in ipairs(opts.config.center) do
-                button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-                button.key_format = "  %s"
-            end
-
-            -- close Lazy and re-open when the dashboard is ready
-            if vim.o.filetype == "lazy" then
-                vim.cmd.close()
-                vim.api.nvim_create_autocmd("User", {
-                    pattern = "DashboardLoaded",
-                    callback = function()
-                        require("lazy").show()
-                    end,
-                })
-            end
-
-            return opts
-        end,
-    },
     -- Tests
     {
         "nvim-neotest/neotest",
@@ -277,7 +184,6 @@ local plugins = {
             "haydenmeade/neotest-jest",
             "zidhuss/neotest-minitest",
             "mfussenegger/nvim-dap",
-            "jfpedroza/neotest-elixir",
         },
         opts = {},
         config = function()
