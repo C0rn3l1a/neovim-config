@@ -79,6 +79,14 @@ local plugins = {
 			"tpope/vim-rhubarb",
 		},
 	},
+    {
+        'm4xshen/autoclose.nvim',
+        config = function () require("autoclose").setup({
+            options = {
+                disable_command_mode = true,
+            }
+        }) end
+    },
 	{
 		"exosyphon/telescope-color-picker.nvim",
 		config = function()
@@ -119,6 +127,38 @@ local plugins = {
             "nvim-lua/plenary.nvim",
         },
     },
+    -- Git blame
+    -- {
+    --     "f-person/git-blame.nvim",
+    --     config = function ()
+    --         require("gitblame").setup({
+    --             enabled = false,
+    --             delay = 100,
+    --         })
+    --     end,
+    --     init = function ()
+    --         vim.keymap.set("n", "<Leader>gl", ":GitBlameToggle<CR>","Git Blame Toggle")
+    --     end
+    -- },
+    -- -- Git conflict markers
+    -- {
+    --     "rhysd/conflict-marker.vim",
+    --     event = "VeryLazy",
+    --     init = function ()
+    --         -- disable the default hightlight group
+    --         vim.g.conflict_marker_highlight_group = ''
+    --
+    --         -- Include text after begin and end markers
+    --         vim.g.conflict_marker_begin = '^<<<<<<< .*$'
+    --         vim.g.conflict_marker_end = '^>>>>>>> .*$'
+    --
+    --         vim.cmd('hightlight ConflictMarkerBegin guibg=#2f7366')
+    --         vim.cmd('hightlight ConflictMarkerOurs guibg=#2e5049')
+    --         vim.cmd('hightlight ConflictMarkerTheirs guibg=#344f69')
+    --         vim.cmd('hightlight ConflictMarkerEnd guibg=#2f628e')
+    --         vim.cmd('hightlight ConflictMarkerCommonAncestorHunk guibg=#754a81')
+    --     end
+    -- },
     ----- /GIT -----
     -- tmux support
     "nathom/tmux.nvim",
@@ -173,10 +213,23 @@ local plugins = {
             require("unimpaired").setup()
         end,
     },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-S>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
+    },
     -- Tests
     {
         "nvim-neotest/neotest",
         dependencies = {
+            "nvim-neotest/nvim-nio",
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
