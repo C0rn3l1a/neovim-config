@@ -128,37 +128,31 @@ local plugins = {
         },
     },
     -- Git blame
-    -- {
-    --     "f-person/git-blame.nvim",
-    --     config = function ()
-    --         require("gitblame").setup({
-    --             enabled = false,
-    --             delay = 100,
-    --         })
-    --     end,
-    --     init = function ()
-    --         vim.keymap.set("n", "<Leader>gl", ":GitBlameToggle<CR>","Git Blame Toggle")
-    --     end
-    -- },
+    {
+        "f-person/git-blame.nvim",
+        config = function ()
+            require("gitblame").setup({
+                enabled = false,
+                delay = 100,
+            })
+        end,
+        init = function ()
+            vim.keymap.set("n", "<Leader>gl", ":GitBlameToggle<CR>", { desc = "Git Blame" })
+        end
+    },
     -- -- Git conflict markers
-    -- {
-    --     "rhysd/conflict-marker.vim",
-    --     event = "VeryLazy",
-    --     init = function ()
-    --         -- disable the default hightlight group
-    --         vim.g.conflict_marker_highlight_group = ''
-    --
-    --         -- Include text after begin and end markers
-    --         vim.g.conflict_marker_begin = '^<<<<<<< .*$'
-    --         vim.g.conflict_marker_end = '^>>>>>>> .*$'
-    --
-    --         vim.cmd('hightlight ConflictMarkerBegin guibg=#2f7366')
-    --         vim.cmd('hightlight ConflictMarkerOurs guibg=#2e5049')
-    --         vim.cmd('hightlight ConflictMarkerTheirs guibg=#344f69')
-    --         vim.cmd('hightlight ConflictMarkerEnd guibg=#2f628e')
-    --         vim.cmd('hightlight ConflictMarkerCommonAncestorHunk guibg=#754a81')
-    --     end
-    -- },
+    {
+        "rhysd/conflict-marker.vim",
+        event = "VeryLazy",
+        init = function ()
+            -- disable the default hightlight group
+            vim.g.conflict_marker_highlight_group = ''
+
+            -- Include text after begin and end markers
+            vim.g.conflict_marker_begin = '^<<<<<<< .*$'
+            vim.g.conflict_marker_end = '^>>>>>>> .*$'
+        end
+    },
     ----- /GIT -----
     -- tmux support
     "nathom/tmux.nvim",
@@ -176,7 +170,7 @@ local plugins = {
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "tokyonight",
+                    theme = "rose-pine",
                 },
                 sections = {
                     lualine_a = { "mode" },
@@ -196,16 +190,6 @@ local plugins = {
             { "nvim-telescope/telescope.nvim" },
         },
     },
-    -- Highlights unique letters in text for faster jumping with F{letter}
-    {
-        "jinh0/eyeliner.nvim",
-        config = function()
-            require("eyeliner").setup({
-                highlight_on_key = true,
-                dim = true,
-            })
-        end,
-    },
     -- more useful keymaps
     {
         "tummetott/unimpaired.nvim",
@@ -220,48 +204,10 @@ local plugins = {
         keys = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
             { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-            { "<c-S>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+            { "t", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "T", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-t>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
         },
-    },
-    -- Tests
-    {
-        "nvim-neotest/neotest",
-        dependencies = {
-            "nvim-neotest/nvim-nio",
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim",
-            "olimorris/neotest-rspec",
-            "haydenmeade/neotest-jest",
-            "zidhuss/neotest-minitest",
-            "mfussenegger/nvim-dap",
-        },
-        opts = {},
-        config = function()
-            local neotest = require("neotest")
-
-            local neotest_jest = require("neotest-jest")({
-                jestCommand = "yarn jest --",
-            })
-            neotest_jest.filter_dir = function(name)
-                return name ~= "node_modules" and name ~= "__snapshots__"
-            end
-
-            neotest.setup({
-                adapters = {
-                    neotest_jest,
-                },
-                output_panel = {
-                    enabled = true,
-                    open = "botright split | resize 15",
-                },
-                quickfix = {
-                    open = false,
-                },
-            })
-        end,
     },
 }
 

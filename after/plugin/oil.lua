@@ -39,7 +39,9 @@ require("oil").setup({
     cleanup_delay_ms = 2000,
     -- Set to true to autosave buffers that are updated with LSP willRenameFiles
     -- Set to "unmodified" to only save unmodified buffers
-    lsp_rename_autosave = false,
+    lsp_file_methods = {
+        autosave_changes = false,
+    },
     -- Constrain the cursor to the editable parts of the oil buffer
     -- Set to `false` to disable, or "name" to keep it on the file names
     constrain_cursor = "editable",
@@ -77,7 +79,7 @@ require("oil").setup({
     use_default_keymaps = true,
     view_options = {
         -- Show files and directories that start with "."
-        show_hidden = false,
+        show_hidden = true,
         -- This function defines what is considered a "hidden" file
         is_hidden_file = function(name, bufnr)
             return vim.startswith(name, ".")

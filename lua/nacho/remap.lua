@@ -9,6 +9,9 @@ vim.keymap.set("n", "<C-s>", ":update<CR>", { desc = "" })
 vim.keymap.set("i", "<C-s>", "<Esc>:update<CR>l ", { desc = "" })
 vim.keymap.set("v", "<C-s>", "<Esc>:update<CR> ", { desc = "" })
 
+-- exit from insert mode
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit from insert mode" })
+
 -- keep cursor in the same place for actions
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append next line to current line" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Long down jump" })
