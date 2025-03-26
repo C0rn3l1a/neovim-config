@@ -1,4 +1,12 @@
 local lsp = require('lsp-zero')
+local wk = require("which-key")
+
+wk.register({
+    -- Harpoon group
+    ["<leader>v"] = { name = "Lsp" },
+    ["<leader>vc"] = { name = "Lsp Code" },
+    ["<leader>vr"] = { name = "Lsp Rename/References" },
+})
 
 lsp.preset("recommended")
 
@@ -46,6 +54,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts, { desc = "LSP References"})
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts, { desc = "LSP Rename"})
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts, { desc = "LSP Signature Help"})
+
 end)
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
@@ -93,3 +102,6 @@ cmp.setup({
         ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
     },
 })
+
+-- mappings
+vim.keymap.set("n", "<leader>vf", ':LspZeroFormat<CR>', { desc = "LSP Format"})

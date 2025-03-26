@@ -4,6 +4,9 @@ vim.g.mapleader = " "
 -- Explorer
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open Explorer" })
 
+-- Expand Lsp Error
+vim.keymap.set("n", "<leader>ve", "<CMD>:lua vim.diagnostic.open_float(0, {scope=\"line\"})<CR>", { desc = "Expand Lsp Error" })
+
 -- save
 vim.keymap.set("n", "<C-s>", ":update<CR>", { desc = "" })
 vim.keymap.set("i", "<C-s>", "<Esc>:update<CR>l ", { desc = "" })
