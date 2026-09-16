@@ -27,3 +27,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"
+
+-- share clipboard with system
+vim.api.nvim_set_option("clipboard","unnamed")
